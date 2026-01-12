@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PayAssured Dashboard</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .btn { background: #28a745; color: white; padding: 10px; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>PayAssured Recovery Dashboard</h1>
+    
+    <a href="/add-client" class="btn">Add New Client</a>
+    
+    <h2>Registered Clients</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Company</th>
+            <th>Email</th>
+        </tr>
+        {% for client in clients %}
+        <tr>
+            <td>{{ client.client_name }}</td>
+            <td>{{ client.company_name }}</td>
+            <td>{{ client.email }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2>Unpaid Invoices (Cases)</h2>
+    <div style="margin-bottom: 10px;">
+        <span>Filter Status: </span>
+        <a href="/">All</a> | 
+        <a href="/?status=New">New</a> | 
+        <a href="/?status=Closed">Closed</a>
+        
+        <span style="margin-left: 20px;">Sort Due Date: </span>
+        <a href="/?sort=asc">Oldest First</a> | 
+        <a href="/?sort=desc">Newest First</a>
+    </div>
+
+    <a href="/add-case" class="btn" style="background: #007bff;">+ Add New Case</a>
+
+    
+    <table>
+        <tr>
+            <th>Client</th>
+            <th>Invoice #</th>
+            <th>Amount</th>
+            <th>Due Date</th>
+            <th>Status</th>
+        </tr>
+        {% for case in cases %}
+        <tr>
+            <td>{{ case.owner.client_name }}</td> 
+            <td style="font-family: monospace;">{{ case.invoice_number }}</td>
+            <td>₹{{ case.invoice_amount }}</td>
+            <td>{{ case.due_date }}</td>
+            <td><strong>{{ case.status }}</strong></td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</body>
+</html>
