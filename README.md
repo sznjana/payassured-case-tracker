@@ -3,11 +3,8 @@ This is a full-stack internal CRM module designed for PayAssured to manage clien
 
 🛠️ Tech Stack
 Backend: Python (FastAPI)
-
 Database: SQLite with SQLAlchemy ORM (Relational structure)
-
 Frontend: HTML5 with Jinja2 Templates
-
 Server: Uvicorn (ASGI)
 
 📂 Project Structure
@@ -30,18 +27,14 @@ Ensure you have Python 3.8+ installed on your system.
 
 2. Install Dependencies
 Run the following command to install the required libraries:
-
-Bash
-
 pip install fastapi uvicorn sqlalchemy jinja2 python-multipart
+
 3. Database Creation
 The application uses SQLite. On the first run, the system will automatically generate a file named recovery.db and create the required clients and cases tables.
 
 4. Running the Application
+   
 Start the server using Uvicorn:
-
-Bash
-
 python -m uvicorn main:app --reload
 Once the server is running, visit http://127.0.0.1:8000 in your browser.
 
