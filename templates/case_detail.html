@@ -1,40 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Case Details</title>
+    <title>Case Update - PayAssured</title>
     <style>
-        body { font-family: sans-serif; margin: 40px; }
-        .card { border: 1px solid #ddd; padding: 20px; border-radius: 8px; max-width: 500px; }
-        .status-tag { font-weight: bold; color: #007bff; }
-        textarea { width: 100%; height: 100px; margin-top: 10px; }
-        button { background: #28a745; color: white; border: none; padding: 10px; cursor: pointer; margin-top: 10px; }
+        body { font-family: sans-serif; margin: 40px; background-color: #f8f9fa; }
+        .container { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 600px; }
+        .detail-row { margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        label { font-weight: bold; color: #555; }
+        select, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+        button { background: #007bff; color: white; padding: 12px; border: none; width: 100%; cursor: pointer; border-radius: 4px; font-size: 16px; margin-top: 15px;}
     </style>
 </head>
 <body>
-    <h1>Case Details: {{ case.invoice_number }}</h1>
-    <div class="card">
-        <p><strong>Client:</strong> {{ case.owner.client_name }}</p>
-        <p><strong>Amount:</strong> ₹{{ case.invoice_amount }}</p>
-        <p><strong>Due Date:</strong> {{ case.due_date }}</p>
-        <p><strong>Current Status:</strong> <span class="status-tag">{{ case.status }}</span></p>
-
-        <hr>
+    <div class="container">
+        <h1>Update Case: {{ case.invoice_number }}</h1>
+        <div class="detail-row"><label>Client:</label> {{ case.owner.client_name }}</div>
+        <div class="detail-row"><label>Amount:</label> ₹{{ case.invoice_amount }}</div>
         
         <form action="/cases/{{ case.id }}/update" method="post">
-            <label><strong>Update Status:</strong></label><br>
+            <label>Current Status</label>
             <select name="status">
                 <option value="New" {% if case.status == 'New' %}selected{% endif %}>New</option>
                 <option value="In Follow-up" {% if case.status == 'In Follow-up' %}selected{% endif %}>In Follow-up</option>
                 <option value="Partially Paid" {% if case.status == 'Partially Paid' %}selected{% endif %}>Partially Paid</option>
                 <option value="Closed" {% if case.status == 'Closed' %}selected{% endif %}>Closed</option>
             </select>
-            <br><br>
-            <label><strong>Follow-up Notes:</strong></label>
-            <textarea name="notes">{{ case.last_follow_up_notes or '' }}</textarea>
-            <button type="submit">Update Case</button>
+
+            <label>Follow-up Notes</label>
+            <textarea name="notes" placeholder="Enter recovery progress notes here...">{{ case.last_follow_up_notes or '' }}</textarea>
+            
+            <button type="submit">Save Updates</button>
         </form>
+        <br>
+        <a href="/">← Back to Dashboard</a>
     </div>
-    <br>
-    <a href="/">Back to Dashboard</a>
 </body>
 </html>

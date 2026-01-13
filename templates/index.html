@@ -56,7 +56,7 @@
         {% for case in cases %}
         <tr>
             <td>{{ case.owner.client_name }}</td> 
-            <td style="font-family: monospace;">{{ case.invoice_number }}</td>
+            <td><a href="/cases/{{ case.id }}">{{ case.invoice_number }}</a></td>
             <td>₹{{ case.invoice_amount }}</td>
             <td>{{ case.due_date }}</td>
             <td><strong>{{ case.status }}</strong></td>

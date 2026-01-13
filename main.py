@@ -98,7 +98,14 @@ def create_case(
 
 @app.get("/cases/{case_id}")
 def case_detail(case_id: int, request: Request, db: Session = Depends(database.get_db)):
+    # 1. Find the case by its ID
     case = db.query(models.Case).filter(models.Case.id == case_id).first()
+    
+    # 2. If the case doesn't exist, show an error (optional but good)
+    if not case:
+        return {"error": "Case not found"}
+        
+    # 3. Send the case data to the detail page
     return templates.TemplateResponse("case_detail.html", {"request": request, "case": case})
 
 @app.post("/cases/{case_id}/update")
