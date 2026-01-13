@@ -33,7 +33,6 @@ pip install fastapi uvicorn sqlalchemy jinja2 python-multipart
 The application uses SQLite. On the first run, the system will automatically generate a file named recovery.db and create the required clients and cases tables.
 
 4. Running the Application
-   
 Start the server using Uvicorn:
 python -m uvicorn main:app --reload
 Once the server is running, visit http://127.0.0.1:8000 in your browser.
@@ -53,3 +52,8 @@ Clean APIs: Structured GET and POST endpoints for data management.
 UI/UX: A functional, scannable dashboard for day-to-day operations.
 
 Filtering/Sorting: Functional logic to organize recovery priorities.
+
+## 📝 Latest Updates
+- **Case Detail Page**: Added a dedicated view to update recovery status and log follow-up notes.
+- **Relational Integrity**: Cases are now strictly linked to registered clients.
+- **Improved UI**: Navigation links added between the Dashboard and Detail views.
